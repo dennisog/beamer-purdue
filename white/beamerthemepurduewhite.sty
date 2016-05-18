@@ -1,0 +1,195 @@
+% beamerthemepurduegold.sty
+%
+% The beamer-purdue "gold" theme
+%
+% Copyright (c) 2016 Dennis Ogbe <dogbe@purdue.edu>
+%
+% This file is published under the Creative Commons Attribution-ShareAlike 4.0
+% International License. For more information, please visit
+% https://creativecommons.org/licenses/by-sa/4.0/
+%
+% See the README.md for usage instructions. This style really only has one
+% option: When called with the "altlogo" option, it will use the "Purdue
+% University" logo instead of the "Purdue Engineering" logo.
+%
+% TODO:
+%  - add section page
+%  - convert all absolute lengths to x\linewidth
+%  - add framesubtitle
+
+% options ---------------------------------------------------------------------
+
+% parse the options: use the "Purdue Engineering" of "Purdue University" logo
+\newif\if@altlogo
+\@altlogofalse
+\DeclareOption{altlogo}{\@altlogotrue}
+
+% process all options
+\ProcessOptions
+
+% set the logo
+\if@altlogo
+\newcommand{\purduelogo}{./logos/PU_signature_pdf.pdf}
+\else
+\newcommand{\purduelogo}{./logos/Eng-Black-Gold-rgb.pdf}
+\fi
+
+
+\mode<presentation>{}
+
+% packages --------------------------------------------------------------------
+\RequirePackage[absolute,overlay]{textpos}
+\RequirePackage{calc}
+
+
+% fonts -----------------------------------------------------------------------
+\usefonttheme{professionalfonts}
+
+
+% colors ----------------------------------------------------------------------
+% main colors
+\definecolor{Black}{HTML}{000000}
+\definecolor{CampusGold}{HTML}{B1810B}
+\definecolor{White}{HTML}{FFFFFF}
+\definecolor{CoalGray}{HTML}{4D4038}
+\definecolor{MoonDustGray}{HTML}{BAA892}
+% extra purdue colors
+\definecolor{EverTrueBlue}{HTML}{5B6870}
+\definecolor{SlayterSkyBlue}{HTML}{7CA6C0}
+\definecolor{AmeliaSkyBlue}{HTML}{A3D6D7}
+\definecolor{LandGrantGreen}{HTML}{085C11}
+\definecolor{RossAdeGreen}{HTML}{849E2A}
+\definecolor{CeleryBogGreen}{HTML}{C3BE0B}
+\definecolor{SpringFestGreen}{HTML}{E9E45B}
+\definecolor{OakenBucketBrown}{HTML}{6B4536}
+\definecolor{BellTowerBrick}{HTML}{C76C14}
+\definecolor{MackeyOrange}{HTML}{FF9B1A}
+\definecolor{YellowWalk}{HTML}{FFD100}
+\definecolor{FountainRunTeal}{HTML}{2EAF9B}
+\definecolor{PappysPurple}{HTML}{AD1F65}
+
+
+% the frame title -------------------------------------------------------------
+% colors
+\setbeamercolor{CampusGold}{bg=CampusGold}
+\setbeamercolor{PurdueBlack}{bg=Black}
+\setbeamercolor{PurdueWhite}{bg=White}
+
+\setbeamercolor{frametitle}{fg=Black}
+\setbeamercolor{framesubtitle}{fg=CoalGray}
+
+% fonts
+\setbeamerfont{frametitle}{size=\Large, series=\bfseries}
+
+% template
+\setbeamertemplate{frametitle}{%
+\vspace*{15pt}
+\insertframetitle
+}%
+
+
+% bottom line -----------------------------------------------------------------
+% fonts
+\setbeamerfont{footernumber}{size=\small, series=\bfseries}
+
+% turn off the navigation syms
+\setbeamertemplate{navigation symbols}{}
+
+% template
+\setbeamertemplate{footline}{%
+  \hspace*{0.02\linewidth}
+  \includegraphics[width=0.23\linewidth]{\purduelogo}
+\hfill
+\begin{beamercolorbox}[
+  wd=0.1\linewidth,
+  ht=15pt,
+  dp=5pt
+  ]{PurdueWhite}
+  \usebeamerfont{footernumber}
+  \usebeamercolor[fg]{author}
+  \flushright
+  \insertframenumber{}
+\end{beamercolorbox}\hspace*{5pt}
+}%
+
+
+% itemizing colors ------------------------------------------------------------
+\useitemizeitemtemplate{%
+    \tiny\raise1.5pt\hbox{\color{Black}$\blacktriangleright$}%
+}
+\usesubitemizeitemtemplate{%
+    \tiny\raise1.5pt\hbox{\color{Black}$\blacktriangleright$}%
+}
+\usesubsubitemizeitemtemplate{%
+    \tiny\raise1.5pt\hbox{\color{Black}$\bigstar$}%
+}
+\setbeamercolor{itemize body}{fg=Black}
+\setbeamercolor{enumerate item}{fg=Black}
+
+% TOC colors ------------------------------------------------------------------
+\setbeamercolor{section in toc}{fg=Black}
+\setbeamertemplate{section in toc}{
+  {\tiny \raisebox{1.5pt}{$\blacktriangleright$}}
+  % change here to change "Part" to "Section" or so
+  Part \inserttocsectionnumber: {\em \inserttocsection\/}
+}
+
+
+% block colors ----------------------------------------------------------------
+\definecolor{titleLine}{RGB}{224,220,217}
+\setbeamercolor{ttline}{bg=titleLine}
+\setbeamercolor{block title}{fg=White, bg=CoalGray}
+\setbeamercolor{block body}{fg=Black, bg=titleLine}
+
+
+% math proof color ------------------------------------------------------------
+\setbeamertemplate{qed symbol}{\color{Black} $\blacksquare$}
+
+
+% title page ------------------------------------------------------------------
+% colors
+\setbeamercolor{PurdueMoonDustGray}{bg=MoonDustGray}
+\setbeamercolor{PurdueCoalGray}{bg=CoalGray}
+
+\setbeamercolor{title}{fg=Black}
+\setbeamercolor{subtitle}{fg=CoalGray}
+\definecolor{titleAuthor}{RGB}{91,82,73}
+\setbeamercolor{author}{fg=titleAuthor}
+
+% fonts
+\setbeamerfont{title}{size=\Large, series=\bfseries}
+\setbeamerfont{subtitle}{size=\large}
+
+% template
+\newlength{\logowidth} % the size of the ece logo on the title page
+\setlength{\logowidth}{0.12\linewidth}
+
+\setbeamertemplate{title page}{%
+\vspace*{0.2\linewidth}
+{\usebeamerfont{title} \usebeamercolor[fg]{title} \noindent \inserttitle}\\
+{\usebeamerfont{subtitle} \usebeamercolor[fg]{subtitle} \insertsubtitle}
+\vspace*{0.01\linewidth}
+\begin{beamercolorbox}[
+  wd=\the\paperwidth,
+  ht=3pt,
+  dp=0pt]{ttline}
+\end{beamercolorbox}%
+\vspace*{0.03\linewidth}
+\begin{center}
+  \usebeamercolor[fg]{author} \noindent \textbf{\insertauthor}
+\end{center}
+\vspace*{0.01\linewidth}
+\begin{center}
+  \usebeamercolor[fg]{author} \noindent \textbf{\insertdate}
+\end{center}
+\vfill
+\includegraphics[width=0.3\linewidth]{\purduelogo}
+
+\begin{textblock*}{\logowidth}(\paperwidth-\logowidth, 0pt)%
+  \includegraphics[width=\logowidth]{./logos/ece_logo.pdf}
+\end{textblock*}
+}%
+
+
+% bullets ---------------------------------------------------------------------
+\renewcommand{\bullet}{{\tiny\raise1.5pt\hbox{\color{Black}$\blacktriangleright$}}}

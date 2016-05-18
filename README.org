@@ -1,0 +1,17 @@
+#+TITLE: beamer-purdue
+#+AUTHOR: Dennis Ogbe
+#+EMAIL: do@ogbe.net
+#+LATEX_CLASS: IEEEtran
+#+LATEX_CLASS_OPTIONS: [journal, onecolumn, 11pt]
+#+LATEX_HEADER: \usepackage[ieee, minted]{boilerp}
+#+LATEX_HEADER: \usemintedstyle{emacs}
+#+HTML_MATHJAX: align:"center"
+#+OPTIONS: toc:nil timestamp:nil
+#+STARTUP: hideblocks
+#+STARTUP: inlineimages
+
+A Beamer template inspired by the Purdue Visual Identity
+
+---
+
+Documentation coming soon!

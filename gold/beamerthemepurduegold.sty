@@ -1,0 +1,213 @@
+% beamerthemepurduegold.sty
+%
+% The beamer-purdue "gold" theme
+%
+% Copyright (c) 2016 Dennis Ogbe <dogbe@purdue.edu>
+%
+% This file is published under the Creative Commons Attribution-ShareAlike 4.0
+% International License. For more information, please visit
+% https://creativecommons.org/licenses/by-sa/4.0/
+%
+% See the README.md for usage instructions. This style really only has one
+% option: When called with the "altlogo" option, it will use the "Purdue
+% University" logo instead of the "Purdue Engineering" logo.
+
+
+% options ---------------------------------------------------------------------
+
+% parse the options: use the "Purdue Engineering" of "Purdue University" logo
+\newif\if@altlogo
+\@altlogofalse
+\DeclareOption{altlogo}{\@altlogotrue}
+
+% process all options
+\ProcessOptions
+
+% set the logo
+\if@altlogo
+\newcommand{\purduelogo}{./logos/PU_signature_pdf.pdf}
+\else
+\newcommand{\purduelogo}{./logos/Eng-Black-Gold-rgb.pdf}
+\fi
+
+
+\mode<presentation>{}
+
+% fonts -----------------------------------------------------------------------
+\usefonttheme{professionalfonts}
+
+
+% colors ----------------------------------------------------------------------
+% main colors
+\definecolor{Black}{HTML}{000000}
+\definecolor{CampusGold}{HTML}{B1810B}
+\definecolor{White}{HTML}{FFFFFF}
+\definecolor{CoalGray}{HTML}{4D4038}
+\definecolor{MoonDustGray}{HTML}{BAA892}
+% extra purdue colors
+\definecolor{EverTrueBlue}{HTML}{5B6870}
+\definecolor{SlayterSkyBlue}{HTML}{7CA6C0}
+\definecolor{AmeliaSkyBlue}{HTML}{A3D6D7}
+\definecolor{LandGrantGreen}{HTML}{085C11}
+\definecolor{RossAdeGreen}{HTML}{849E2A}
+\definecolor{CeleryBogGreen}{HTML}{C3BE0B}
+\definecolor{SpringFestGreen}{HTML}{E9E45B}
+\definecolor{OakenBucketBrown}{HTML}{6B4536}
+\definecolor{BellTowerBrick}{HTML}{C76C14}
+\definecolor{MackeyOrange}{HTML}{FF9B1A}
+\definecolor{YellowWalk}{HTML}{FFD100}
+\definecolor{FountainRunTeal}{HTML}{2EAF9B}
+\definecolor{PappysPurple}{HTML}{AD1F65}
+
+
+% the frame title -------------------------------------------------------------
+\setbeamercolor{CampusGold}{bg=CampusGold}
+\setbeamercolor{PurdueBlack}{bg=Black}
+\setbeamerfont{frametitle}{size=\Large, series=\bfseries}
+\setbeamercolor{frametitle}{fg=White}
+
+\setbeamercolor{framesubtitle}{fg=CoalGray}
+
+\setbeamertemplate{frametitle}{%
+  \vspace{-0.65em}
+  \begin{beamercolorbox}[
+    wd=\the\paperwidth,
+    ht=0.08\linewidth,
+    dp=0.02\linewidth]{CampusGold}
+    \usebeamerfont{frametitle}
+    {\usebeamercolor{frametitle} \insertframetitle}
+  \end{beamercolorbox}%
+    {%
+      \ifx\insertframesubtitle\@empty%
+      \else%
+      {
+        \vspace{0.01\linewidth}
+        \usebeamerfont{framesubtitle}
+        \usebeamercolor[fg]{framesubtitle}
+        \insertframesubtitle\strut\par}%
+      \fi
+    }%
+}%
+
+
+% bottom line -----------------------------------------------------------------
+\setbeamercolor{PurdueWhite}{bg=White}
+\setbeamerfont{footernumber}{size=\small, series=\bfseries}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{%
+  \hspace*{0.01\linewidth}
+  \vspace*{-0.5em}
+  \begin{beamercolorbox}[
+    wd=0.6\linewidth]{PurdueWhite}
+    \usebeamerfont{footernumber}
+    \insertframenumber{}/\inserttotalframenumber{}
+  \end{beamercolorbox}
+  \hspace*{0.3\linewidth}
+  \begin{minipage}[c]{\linewidth}
+  \vbox{\includegraphics[width=0.23\linewidth]{\purduelogo}\\
+  \begin{beamercolorbox}[wd=0.23\linewidth, ht=0.02\linewidth]{PurdueWhite}
+  \end{beamercolorbox}}
+  \end{minipage}
+}%
+
+
+% itemizing colors ------------------------------------------------------------
+\useitemizeitemtemplate{%
+    \tiny\raise1.5pt\hbox{\color{Black}$\blacktriangleright$}%
+}
+\usesubitemizeitemtemplate{%
+    \tiny\raise1.5pt\hbox{\color{Black}$\blacktriangleright$}%
+}
+\usesubsubitemizeitemtemplate{%
+    \tiny\raise1.5pt\hbox{\color{Black}$\bigstar$}%
+}
+\setbeamercolor{itemize body}{fg=Black}
+\setbeamercolor{enumerate item}{fg=Black}
+
+% TOC colors ------------------------------------------------------------------
+\setbeamercolor{section in toc}{fg=Black}
+\setbeamertemplate{section in toc}{
+  {\tiny \raisebox{1.5pt}{$\blacktriangleright$}}
+  % change here to change "Part" to "Section" or so
+  Part \inserttocsectionnumber: {\em \inserttocsection\/}
+}
+
+
+% block colors ----------------------------------------------------------------
+\setbeamercolor{block title}{fg=White, bg=CampusGold}
+\setbeamercolor{block body}{fg=Black, bg=MoonDustGray}
+
+
+% math proof color ------------------------------------------------------------
+\setbeamertemplate{qed symbol}{\color{Black} $\blacksquare$}
+
+
+% title page ------------------------------------------------------------------
+\setbeamercolor{PurdueMoonDustGray}{bg=MoonDustGray}
+\setbeamercolor{PurdueCoalGray}{bg=CoalGray}
+
+\setbeamercolor{title}{fg=Black}
+\setbeamerfont{title}{size=\LARGE, series=\bfseries}
+\setbeamercolor{subtitle}{fg=CoalGray}
+\setbeamerfont{subtitle}{size=\large}
+
+\setbeamertemplate{title page}{%
+\hspace*{-0.1\linewidth}
+\begin{minipage}[t]{\the\paperwidth}
+  \hbox{%
+    \begin{beamercolorbox}[
+      wd=0.1\linewidth,
+      ht=0.28\linewidth,
+      dp=0.02\linewidth]{CampusGold}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[
+      wd=0.9\linewidth,
+      ht=0.28\linewidth,
+      dp=0.02\linewidth,
+      sep=0.8em]{PurdueMoonDustGray}
+      \parbox{0.8\linewidth}{%
+        {\usebeamerfont{title} \usebeamercolor[fg]{title} \noindent \inserttitle} \\
+        {\usebeamerfont{subtitle} \usebeamercolor[fg]{subtitle} \insertsubtitle}
+      }%
+    \end{beamercolorbox}
+  }%
+\end{minipage}
+\vspace*{0.5em} \\
+{\hspace*{1em} \bf \insertauthor}\\
+{\hspace*{1em} \bf \insertdate}
+
+\vfill
+\hspace*{0.6\linewidth}
+\includegraphics[width=0.4\linewidth]{\purduelogo}\\
+}%
+
+
+% section page ----------------------------------------------------------------
+\AtBeginSection{%
+\begin{frame}
+\hspace*{-0.1\linewidth}
+\begin{minipage}[t]{\the\paperwidth}
+  \hbox{%
+    \begin{beamercolorbox}[
+      wd=0.1\linewidth,
+      ht=0.28\linewidth,
+      dp=0.02\linewidth]{PurdueMoonDustGray}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[
+      wd=0.9\linewidth,
+      ht=0.28\linewidth,
+      dp=0.02\linewidth,
+      sep=0.8em]{CampusGold}
+      {\usebeamerfont{frametitle} \usebeamercolor[fg]{frametitle}
+        % change here to change "Part" to "Section" or so
+        Part \insertsectionnumber: \insertsection}
+    \end{beamercolorbox}
+  }%
+\end{minipage}
+\end{frame}
+}%
+
+
+% bullets ---------------------------------------------------------------------
+\renewcommand{\bullet}{{\tiny\raise1.5pt\hbox{\color{Black}$\blacktriangleright$}}}

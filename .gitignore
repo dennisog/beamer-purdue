@@ -1,0 +1,36 @@
+# auctex latex
+auto
+_region_*
+
+# minted latex
+_minted*
+
+# mote latex
+*.swp
+*.un~
+*.aux
+*-blx.bib
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.latexmain
+*.toc
+*.bib~
+*-eps-converted-to*
+*.nav
+*.snm
+
+# OSX + Windows
+.DS_Store
+Thumbs.db
+
+# emacs temp files
+*~
+
+# Local Variables:
+# mode: conf-space
+# End:

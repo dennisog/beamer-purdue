@@ -1,0 +1,144 @@
+% slides_example.tex
+%
+% Example .tex file for the beamer-purdue theme
+%
+% Copyright (c) 2016 Dennis Ogbe <dogbe@purdue.edu>
+%
+% This file is published under the Creative Commons Attribution-ShareAlike 4.0
+% International License. For more information, please visit
+% https://creativecommons.org/licenses/by-sa/4.0/
+%
+% See the README.md for usage instructions. This style really only has one
+% option: When called with the "altlogo" option, it will use the "Purdue
+% University" logo instead of the "Purdue Engineering" logo.
+
+% we want serif math fonts, they look better
+\documentclass[pdf, mathserif]{beamer}
+
+% load required packages. I prefer IEEEtran for equations, but that's a
+% personal preference.
+\usepackage{IEEEtrantools}
+
+\usepackage{pgf}  % PGF/TikZ is needed for nice plots
+
+\usepackage[cmex10]{mathtools} % for math equations
+\usepackage{amssymb}
+\usepackage{bm}
+
+% theorems - can use \begin{IEEEproof} as alternative to \begin{proof}
+\usepackage{amsthm}
+\renewcommand{\qedsymbol}{$\blacksquare$} % want a black square for proofs
+
+% useful to set this when using Inkscape SVG figures
+\graphicspath{{./graphics/}}
+
+% tell beamer to use the purdue-gold theme
+\usetheme[altlogo]{purduewhite}
+% \usetheme{purduewhite}
+
+
+% set title and author
+\title{beamer-purdue}
+\subtitle{A Beamer template inspired by the Purdue Visual Identity}
+\author{Dennis Ogbe}
+
+% let's get started
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Overview}
+  \tableofcontents
+\end{frame}
+
+\section{Examples}
+\label{sec:examples}
+
+\begin{frame}
+  \frametitle{Hello!}
+  \framesubtitle{The \texttt{beamer-purdue} template}
+
+  This is the \texttt{beamer-purdue} Theme. A Beamer template inspired
+  by the Purdue Visual Identity.
+
+  An itemized list looks as follows:
+  \begin{itemize}
+  \item Item 1
+  \item Item 2
+  \end{itemize}
+
+  The continuous-time Fourier Transform of a signal $x(t)$ is defined as
+
+  \begin{IEEEeqnarray}{rCl}
+    \label{eq:ft}
+    X(\omega) = \int_{-\infty}^{\infty} x(t)e^{-j\omega t}\ \mathrm{dt}
+  \end{IEEEeqnarray}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{A Theorem in a Box}
+
+  \begin{theorem}
+    The Bessel functions of the first kind $J_{v}(x)$ are defined as the
+    solutions to the Bessel differential equation
+    \begin{IEEEeqnarray}{rCl}
+      \label{eq:bessel}
+      x^{2} \frac{d^{2}\,y}{d\,x^{2}} + x \frac{d\,y}{d\,x} + \left( x^{2} - v^{2} \right)y = 0.
+    \end{IEEEeqnarray}
+  \end{theorem}
+  \begin{IEEEproof}
+    Omitted.
+  \end{IEEEproof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Figures}
+
+  We can include graphics just like we are used to, for example this block
+  diagram of an noise-canceling system:
+  \begin{center}
+    \input{./graphics/anc_bd.pdf_tex}
+  \end{center}
+\end{frame}
+
+\section{Plots}
+\label{sec:plots}
+
+\begin{frame}
+  \frametitle{Plotting is fun!}
+
+  On the following pages, we include two examples on how to include plots:
+  \begin{enumerate}
+    \item A PDF plot
+    \item A PGF/TikZ plot
+  \end{enumerate}
+
+  PDF plots are nice, but nothing beats the native look of PGF/TikZ. The source
+  code to generate both plots can be found in \texttt{extra/plot\_bessel.py}
+\end{frame}
+
+\begin{frame}
+  \frametitle{A PDF Plot}
+  \begin{center}
+    \includegraphics{./plots/bessel.pdf}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{A PGF/TikZ Plot}
+  \begin{center}
+    \input{./plots/bessel.pgf}
+  \end{center}
+\end{frame}
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
