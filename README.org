@@ -13,17 +13,17 @@
 A Beamer template inspired by the [[https://www.purdue.edu/brand/visual/colors.html][Purdue Visual Identity]]. For more information,
 check out my [[https://ogbe.net/blog/beamer-purdue.html][blog post]] about it.
 
------
-
 ** Downloads
 You can download the beamer template using the links below.
 
 *** "Gold" theme
 [[./gold/preview/beamer-purdue-gold-0.png]]
+
 [[https://raw.githubusercontent.com/dennisog/beamer-purdue/master/dl/beamer-purdue-gold.zip][Download here]]
 
 *** "White" theme
 [[./white/preview/beamer-purdue-white-0.png]]
+
 [[https://raw.githubusercontent.com/dennisog/beamer-purdue/master/dl/beamer-purdue-white.zip][Download here]]
 
 ** Licenses
