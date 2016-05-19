@@ -16,7 +16,15 @@ check out my [[https://ogbe.net/blog/beamer-purdue.html][blog post]] about it.
 -----
 
 ** Downloads
-To make
+You can download the beamer template using the links below.
+
+*** "Gold" theme
+[[https://raw.githubusercontent.com/dennisog/beamer-purdue/master/gold/preview/beamer-purdue-gold-0.png][beamer-purdue-gold]]
+[[https://raw.githubusercontent.com/dennisog/beamer-purdue/master/dl/beamer-purdue-gold.zip][Download here]]
+
+*** "White" theme
+[[https://raw.githubusercontent.com/dennisog/beamer-purdue/master/gold/preview/beamer-purdue-white-0.png][beamer-purdue-white]]
+[[https://raw.githubusercontent.com/dennisog/beamer-purdue/master/dl/beamer-purdue-white.zip][Download here]]
 
 ** Licenses
 The template, the example presentation, and all figures are published under the
