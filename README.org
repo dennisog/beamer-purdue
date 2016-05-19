@@ -7,11 +7,18 @@
 #+LATEX_HEADER: \usemintedstyle{emacs}
 #+HTML_MATHJAX: align:"center"
 #+OPTIONS: toc:nil timestamp:nil
-#+STARTUP: hideblocks
+#+STARTUP: hideblocks showall
 #+STARTUP: inlineimages
 
-A Beamer template inspired by the Purdue Visual Identity
+A Beamer template inspired by the [[https://www.purdue.edu/brand/visual/colors.html][Purdue Visual Identity]]. For more information,
+check out my [[https://ogbe.net/blog/beamer-purdue.html][blog post]] about it.
 
----
+-----
 
-Documentation coming soon!
+** Downloads
+To make
+
+** Licenses
+The template, the example presentation, and all figures are published under the
+[[https://creativecommons.org/licenses/by-sa/4.0/][CC-BY-SA 4.0]] license. The example code used to generate the plots is MIT/Expat
+Licensed.
