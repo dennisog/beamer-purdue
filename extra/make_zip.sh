@@ -33,7 +33,7 @@ for THEME in "${THEMES[@]}"; do
   ! [[ -d "$THEME" ]] && exit 1
   cd "$THEME"
   cp "$REPO/README.org" .
-  zip -r - . 2>/dev/null | cat > "$REPO/dl/beamer-purdue-$THEME.zip"
+  zip -r --exclude "*preview*" - . 2>/dev/null | cat > "$REPO/dl/beamer-purdue-$THEME.zip"
   [[ $? != "0" ]] && exit 1
   cd ..
 done
