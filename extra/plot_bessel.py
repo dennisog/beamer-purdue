@@ -30,11 +30,10 @@ import os
 import subprocess
 import matplotlib as mpl
 mpl.use("pgf")
-from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import matplotlib.markers as mk
 import matplotlib.cm as cm
-import shutil
+
 
 # some housekeeping first
 def figsize(scale):
