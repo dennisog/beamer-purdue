@@ -19,11 +19,11 @@ check out my [[https://ogbe.net/blog/beamer-purdue.html][blog post]] about it.
 You can download the beamer template using the links below.
 
 *** "Gold" theme
-[[https://raw.githubusercontent.com/dennisog/beamer-purdue/master/gold/preview/beamer-purdue-gold-0.png][beamer-purdue-gold]]
+[[./gold/preview/beamer-purdue-gold-0.png]]
 [[https://raw.githubusercontent.com/dennisog/beamer-purdue/master/dl/beamer-purdue-gold.zip][Download here]]
 
 *** "White" theme
-[[https://raw.githubusercontent.com/dennisog/beamer-purdue/master/gold/preview/beamer-purdue-white-0.png][beamer-purdue-white]]
+[[./white/preview/beamer-purdue-white-0.png]]
 [[https://raw.githubusercontent.com/dennisog/beamer-purdue/master/dl/beamer-purdue-white.zip][Download here]]
 
 ** Licenses
