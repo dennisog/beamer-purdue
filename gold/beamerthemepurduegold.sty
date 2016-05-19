@@ -33,6 +33,12 @@
 
 \mode<presentation>{}
 
+
+% packages --------------------------------------------------------------------
+\RequirePackage[absolute,overlay]{textpos}
+\RequirePackage{calc}
+
+
 % fonts -----------------------------------------------------------------------
 \usefonttheme{professionalfonts}
 
@@ -144,6 +150,11 @@
 
 
 % title page ------------------------------------------------------------------
+\newlength{\purduelogowidth} % the size of the purdue logo on the title page
+\setlength{\purduelogowidth}{0.4\linewidth}
+\newlength{\purduelogomargin}
+\setlength{\purduelogomargin}{\leftmargini+0.07\linewidth}
+
 \setbeamercolor{PurdueMoonDustGray}{bg=MoonDustGray}
 \setbeamercolor{PurdueCoalGray}{bg=CoalGray}
 
@@ -177,9 +188,9 @@
 {\hspace*{1em} \bf \insertauthor}\\
 {\hspace*{1em} \bf \insertdate}
 
-\vfill
-\hspace*{0.6\linewidth}
-\includegraphics[width=0.4\linewidth]{\purduelogo}\\
+\begin{textblock*}{\purduelogowidth}(\purduelogomargin, \textheight-\leftmargini)%
+  \includegraphics[width=\purduelogowidth]{\purduelogo}
+\end{textblock*}
 }%
 
 

@@ -14,9 +14,7 @@
 %
 % TODO:
 %  - add section page
-%  - convert all absolute lengths to x\linewidth
 %  - add framesubtitle
-%  - use textpos for logo on title (also in gold theme)
 
 % options ---------------------------------------------------------------------
 
@@ -37,6 +35,7 @@
 
 
 \mode<presentation>{}
+
 
 % packages --------------------------------------------------------------------
 \RequirePackage[absolute,overlay]{textpos}
@@ -162,8 +161,13 @@
 \setbeamerfont{subtitle}{size=\large}
 
 % template
-\newlength{\logowidth} % the size of the ece logo on the title page
-\setlength{\logowidth}{0.12\linewidth}
+\newlength{\ecelogowidth} % the size of the ece logo on the title page
+\setlength{\ecelogowidth}{0.12\linewidth}
+\newlength{\purduelogowidth} % the size of the purdue logo on the title page
+\setlength{\purduelogowidth}{0.4\linewidth}
+\newlength{\purduelogomargin}
+\setlength{\purduelogomargin}{\leftmargini}
+
 
 \setbeamertemplate{title page}{%
 \vspace*{0.2\linewidth}
@@ -183,11 +187,13 @@
 \begin{center}
   \usebeamercolor[fg]{author} \noindent \textbf{\insertdate}
 \end{center}
-\vfill
-\includegraphics[width=0.3\linewidth]{\purduelogo}
 
-\begin{textblock*}{\logowidth}(\paperwidth-\logowidth, 0pt)%
-  \includegraphics[width=\logowidth]{./logos/ece_logo.pdf}
+\begin{textblock*}{\purduelogowidth}(\purduelogomargin, \textheight-\purduelogomargin)%
+  \includegraphics[width=\purduelogowidth]{\purduelogo}
+\end{textblock*}
+
+\begin{textblock*}{\ecelogowidth}(\paperwidth-\ecelogowidth, 0pt)%
+  \includegraphics[width=\ecelogowidth]{./logos/ece_logo.pdf}
 \end{textblock*}
 }%
 
