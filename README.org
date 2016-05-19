@@ -28,5 +28,5 @@ You can download the beamer template using the links below.
 
 ** Licenses
 The template, the example presentation, and all figures are published under the
-[[https://creativecommons.org/licenses/by-sa/4.0/][CC-BY-SA 4.0]] license. The example code used to generate the plots is MIT/Expat
+[[https://creativecommons.org/licenses/by/4.0/][CC-BY 4.0]] license. The example code used to generate the plots is MIT/Expat
 Licensed.
