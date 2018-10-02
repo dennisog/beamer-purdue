@@ -1,0 +1,234 @@
+% beamerthemepurduegoldposter.sty
+%
+% The beamer-purdue "gold" theme, poster edition
+%
+% Copyright (c) 2016 Dennis Ogbe <dogbe@purdue.edu>
+%
+% This file is published under the Creative Commons Attribution 4.0
+% International License. For more information, please visit
+% https://creativecommons.org/licenses/by/4.0/
+
+
+% packages --------------------------------------------------------------------
+\RequirePackage[absolute,overlay]{textpos}
+\RequirePackage{calc}
+\RequirePackage{tcolorbox}
+\RequirePackage{IEEEtrantools}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{graphicx}
+\RequirePackage{subcaption}
+\RequirePackage{pifont}
+\RequirePackage{algorithm}
+\RequirePackage{algpseudocode}
+\RequirePackage[cmex10]{mathtools} % for math equations
+\RequirePackage{amssymb}
+\RequirePackage{bm}
+\RequirePackage[absolute,overlay]{textpos}
+% use absolute indexing for textpos
+\setlength{\TPHorizModule}{\paperwidth}
+\setlength{\TPVertModule}{\paperheight}
+
+\RequirePackage{pgf, tikz}
+\usetikzlibrary{%
+  arrows.meta, shapes.misc,
+  decorations.text,
+  decorations.pathreplacing,
+  angles, quotes,
+  positioning, calc,
+  patterns
+}%
+
+\RequirePackage{svg}
+
+% fonts -----------------------------------------------------------------------
+\usefonttheme{professionalfonts}
+
+% colors ----------------------------------------------------------------------
+% main colors
+\definecolor{Black}{HTML}{000000}
+\definecolor{CampusGold}{HTML}{B1810B}
+\definecolor{White}{HTML}{FFFFFF}
+\definecolor{CoalGray}{HTML}{4D4038}
+\definecolor{MoonDustGray}{HTML}{BAA892}
+% extra purdue colors
+\definecolor{EverTrueBlue}{HTML}{5B6870}
+\definecolor{SlayterSkyBlue}{HTML}{7CA6C0}
+\definecolor{AmeliaSkyBlue}{HTML}{A3D6D7}
+\definecolor{LandGrantGreen}{HTML}{085C11}
+\definecolor{RossAdeGreen}{HTML}{849E2A}
+\definecolor{CeleryBogGreen}{HTML}{C3BE0B}
+\definecolor{SpringFestGreen}{HTML}{E9E45B}
+\definecolor{OakenBucketBrown}{HTML}{6B4536}
+\definecolor{BellTowerBrick}{HTML}{C76C14}
+\definecolor{MackeyOrange}{HTML}{FF9B1A}
+\definecolor{YellowWalk}{HTML}{FFD100}
+\definecolor{FountainRunTeal}{HTML}{2EAF9B}
+\definecolor{PappysPurple}{HTML}{AD1F65}
+
+% some extra colors
+\definecolor{Red}{HTML}{FF0000}
+\definecolor{Green}{HTML}{085C11}
+\definecolor{Blue}{HTML}{2D2D9F}
+
+% the frame title -------------------------------------------------------------
+\setbeamercolor{CampusGold}{bg=CampusGold}
+\setbeamercolor{PurdueBlack}{bg=Black}
+\setbeamerfont{frametitle}{size=\Large, series=\bfseries}
+\setbeamercolor{frametitle}{fg=White}
+
+\setbeamercolor{framesubtitle}{fg=CoalGray}
+
+% bottom line -----------------------------------------------------------------
+\setbeamercolor{PurdueWhite}{bg=White}
+\setbeamerfont{footernumber}{size=\small, series=\bfseries}
+
+\setbeamertemplate{navigation symbols}{}
+
+% itemizing colors ------------------------------------------------------------
+\useitemizeitemtemplate{%
+    \tiny\raise1.5pt\hbox{\color{Black}$\blacktriangleright$}%
+}
+\usesubitemizeitemtemplate{%
+    \tiny\raise1.5pt\hbox{\color{Black}$\blacktriangleright$}%
+}
+\usesubsubitemizeitemtemplate{%
+    \tiny\raise1.5pt\hbox{\color{Black}$\bigstar$}%
+}
+\setbeamercolor{itemize body}{fg=Black}
+\setbeamercolor{enumerate item}{fg=Black}
+\setbeamercolor{local structure}{fg=Black}
+
+% math proof color ------------------------------------------------------------
+\setbeamertemplate{qed symbol}{\color{Black} $\blacksquare$}
+
+% more math
+\renewcommand{\qedsymbol}{$\blacksquare$} % want a black square for proofs
+\renewcommand{\qed}{\hfill\(\blacksquare\)}
+
+% Calligraphic uppercase
+\def\cA{{\mathcal{A}}} \def\cB{{\mathcal{B}}} \def\cC{{\mathcal{C}}} \def\cD{{\mathcal{D}}}
+\def\cE{{\mathcal{E}}} \def\cF{{\mathcal{F}}} \def\cG{{\mathcal{G}}} \def\cH{{\mathcal{H}}}
+\def\cI{{\mathcal{I}}} \def\cJ{{\mathcal{J}}} \def\cK{{\mathcal{K}}} \def\cL{{\mathcal{L}}}
+\def\cM{{\mathcal{M}}} \def\cN{{\mathcal{N}}} \def\cO{{\mathcal{O}}} \def\cP{{\mathcal{P}}}
+\def\cQ{{\mathcal{Q}}} \def\cR{{\mathcal{R}}} \def\cS{{\mathcal{S}}} \def\cT{{\mathcal{T}}}
+\def\cU{{\mathcal{U}}} \def\cV{{\mathcal{V}}} \def\cW{{\mathcal{W}}} \def\cX{{\mathcal{X}}}
+\def\cY{{\mathcal{Y}}} \def\cZ{{\mathcal{Z}}} \def\cz{{\mathcal{z}}}
+
+% Bold
+\def\ba{{\mathbf{a}}}  \def\bb{{\mathbf{b}}}  \def\bc{{\mathbf{c}}} \def\bd{{\mathbf{d}}}
+\def\bee{{\mathbf{e}}} \def\bff{{\mathbf{f}}} \def\bg{{\mathbf{g}}} \def\bh{{\mathbf{h}}}
+\def\bi{{\mathbf{i}}}  \def\bj{{\mathbf{j}}}  \def\bk{{\mathbf{k}}} \def\bl{{\mathbf{l}}}
+\def\bmm{{\mathbf{m}}} \def\bn{{\mathbf{n}}}  \def\bo{{\mathbf{o}}} \def\bp{{\mathbf{p}}}
+\def\bq{{\mathbf{q}}}  \def\br{{\mathbf{r}}}  \def\bs{{\mathbf{s}}} \def\bt{{\mathbf{t}}}
+\def\bu{{\mathbf{u}}}  \def\bv{{\mathbf{v}}}  \def\bw{{\mathbf{w}}} \def\bx{{\mathbf{x}}}
+\def\by{{\mathbf{y}}}  \def\bz{{\mathbf{z}}}
+\def\bxb{\bar{\mathbf{x}}} \def\bone{\mathbf{1}} \def\bzero{\mathbf{0}}
+\def\btheta{\bm{\theta}}
+\def\bsigma{\bm{\sigma}}
+
+\def\bA{{\mathbf{A}}} \def\bB{{\mathbf{B}}} \def\bC{{\mathbf{C}}} \def\bD{{\mathbf{D}}}
+\def\bE{{\mathbf{E}}} \def\bF{{\mathbf{F}}} \def\bG{{\mathbf{G}}} \def\bH{{\mathbf{H}}}
+\def\bI{{\mathbf{I}}} \def\bJ{{\mathbf{J}}} \def\bK{{\mathbf{K}}} \def\bL{{\mathbf{L}}}
+\def\bM{{\mathbf{M}}} \def\bN{{\mathbf{N}}} \def\bO{{\mathbf{O}}} \def\bP{{\mathbf{P}}}
+\def\bQ{{\mathbf{Q}}} \def\bR{{\mathbf{R}}} \def\bS{{\mathbf{S}}} \def\bT{{\mathbf{T}}}
+\def\bU{{\mathbf{U}}} \def\bV{{\mathbf{V}}} \def\bW{{\mathbf{W}}} \def\bX{{\mathbf{X}}}
+\def\bY{{\mathbf{Y}}} \def\bZ{{\mathbf{Z}}}
+
+% Operators
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\vectorize}{vec}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator*{\argmin}{arg\!\min}
+\DeclareMathOperator*{\argmax}{arg\!\max}
+
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\rect}{rect}
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\Real}{Re}
+\DeclareMathOperator{\Imag}{Im}
+\DeclareMathOperator{\pep}{PEP}
+\DeclareMathOperator{\prob}{Pr}
+\DeclareMathOperator{\sgn}{sgn}
+
+\def\reals{{\mathbb{R}}}
+\def\complexs{{\mathbb{C}}}
+\def\expec{{\mathbb{E}}}
+
+% conjugation bar
+\newcommand{\conj}[1]{\overline{#1}}
+
+% vectors
+\newcommand{\vectornorm}[1]{\left\|#1\right\|}
+\newcommand{\rowvec}[1]{\begin{bmatrix}#1\end{bmatrix}^{\mathsf{T}}} % \rowvec{1 & 2 & 3}
+\newcommand{\colvec}[1]{\begin{bmatrix}#1\end{bmatrix}} % \colvec{1 \\ 2 \\ 3}
+
+% Matrix transposition
+\newcommand{\T}{\mathsf{T}}
+%\newcommand{\H}{\mathsf{H}}
+
+\newcommand{\Exp}[1]{\mathrm{E}\left\{#1\right\}}
+\newcommand{\hsppp}{ {\hspace{0.01in}} }
+
+% see the algorithmic statements below
+\newcommand{\ParState}[1]{\parbox[t]{\dimexpr\linewidth-\algorithmicindent}{%
+      \setlength{\hangindent}{\algorithmicindent}
+      {#1}\strut}}
+\newcommand{\ParStateTwo}[1]{\parbox[t]{\dimexpr\linewidth-\algorithmicindent-\algorithmicindent}{%
+      \setlength{\hangindent}{\algorithmicindent}
+      {#1}\strut}}
+\newcommand{\ParStateZero}[1]{\parbox[t]{\dimexpr\linewidth}{%
+      \setlength{\hangindent}{\algorithmicindent}
+      {#1}\strut}}
+
+% title page ------------------------------------------------------------------
+\setbeamercolor{PurdueMoonDustGray}{bg=MoonDustGray}
+\setbeamercolor{PurdueCoalGray}{bg=CoalGray}
+\setbeamercolor{title}{fg=Black}
+\setbeamerfont{title}{size=\LARGE, series=\bfseries}
+\setbeamercolor{subtitle}{fg=CoalGray}
+\setbeamerfont{subtitle}{size=\large}
+
+% bullets ---------------------------------------------------------------------
+\renewcommand{\bullet}{\small\raisebox{1.5pt}{\hbox{\color{Black}$\blacktriangleright$}}}
+
+% blocks ---------------------------------------------------------------------
+\setbeamercolor{block title}{fg=White, bg=CampusGold}
+\setbeamercolor{block body}{fg=Black}
+
+% tcolorbox settings
+\tcbuselibrary{skins}
+\tcbuselibrary{raster}
+\tcbset{skin=enhanced}
+\newtcolorbox[auto counter]{mybox}[2][]{
+  colframe=black!75,
+  colback=white,
+  sidebyside,
+  lower separated=false,
+  sharpish corners,
+  adjusted title=\thetcbcounter. #2,
+  title filled,
+  colbacktitle=CampusGold,
+  % colbacktitle=MoonDustGray,
+  %coltitle=black,
+  drop shadow,
+  fonttitle=\bfseries,
+  #1
+}
+
+\newtcolorbox{mysubbox}[2][]{
+  colback=white,
+  toprule=1pt,
+  leftrule=1pt,
+  rightrule=1pt,
+  bottomrule=1pt,
+  boxsep=0pt,
+  arc=0pt,
+  adjusted title=#2,
+  title filled,
+  coltitle=black,
+  % coltitle=white,
+  colbacktitle=MoonDustGray,
+  % colbacktitle=CampusGold,
+  colframe=MoonDustGray,
+  #1
+}

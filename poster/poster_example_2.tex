@@ -1,0 +1,373 @@
+% poster_example_2.tex
+%
+% Another example poster
+%
+% Copyright (c) 2017 Dennis Ogbe <dogbe@purdue.edu>
+%
+% This file is published under the Creative Commons Attribution-NonCommercial
+% 4.0 International License. For more information, please visit
+% https://creativecommons.org/licenses/by-nc/4.0/
+
+% Sometimes these commands help with Adobe reader
+\pdfobjcompresslevel=0
+\pdfminorversion=4
+
+\documentclass[pdf]{beamer}
+
+% beamerposter
+\usepackage[orientation=portrait,size=custom,width=60.96,height=91.44, scale=1.35]{beamerposter}
+
+\usepackage{framed}
+\usepackage{cmbright}
+\usepackage{filecontents}
+
+% bibliography
+\begin{filecontents}{\jobname.bib}
+@article{journal_paper,
+	title = "{Noisy Beam Alignment Techniques for Reciprocal MIMO Channels}",
+	journal = {(in press) IEEE Trans. Sig. Proc. (arXiv:1609.03601 [cs.IT])},
+	author = {D. Ogbe and D. J. Love and V. Raghavan},
+	year = 2017,
+}
+@inproceedings{conference_paper,
+	title = {{Iterative} {Beam} {Alignment} {Algorithms} for {TDD} {MIMO} {Channels}},
+	booktitle = {2017 {IEEE} {International} {Conference} on {Acoustics}, {Speech}, and {Signal} {Processing} ({ICASSP})},
+	author = {D. Ogbe and D. J. Love and V. Raghavan},
+	year = 2017,
+	month = Mar.,
+  pages = {3469--3473}
+}
+
+\end{filecontents}
+\usepackage[bibstyle=ieee,citestyle=numeric,backend=biber]{biblatex}
+\addbibresource{\jobname.bib}
+% if the following were not set, biblatex would try to insert a section on
+% every frame, which breaks beamer
+\defbibheading{bibliography}[\bibname]{}
+% modify the font size of the \cite commands
+% we want numbers instead of symbols in the bibliography
+\setbeamertemplate{bibliography item}[text]
+% make it small
+\renewcommand*{\bibfont}{\footnotesize}
+
+% useful to set this when using Inkscape SVG figures
+\graphicspath{{./figures/}}
+
+\usetheme{purduegoldposter}
+
+
+% set title and author
+\title{Noisy Beam Alignment Techniques for Reciprocal \\ MIMO Channels}
+\subtitle{NASIT 2017, Atlanta, GA}
+\author{Dennis Ogbe$^{*}$, David J. Love$^{*}$, Vasanthan Raghavan$^{\dagger}$}
+\date{June 5-9, 2017}
+
+
+\begin{document}
+\begin{frame}[t]
+% title
+\begin{textblock}{1}(0,0)
+  \begin{tcolorbox}[
+    % colors
+    colback=MoonDustGray,
+    colframe=black,
+    % lower and upper side by side
+    sidebyside,
+    lower separated=false,
+    % 80% for title, 20% for logos
+    righthand width=0.2\paperwidth,
+    % rule widths & arcs
+    toprule=0pt,
+    leftrule=0pt,
+    rightrule=0pt,
+    bottomrule=0.3in,
+    arc=0pt,
+    % padding
+    % boxsep=0.2in,
+    % text & logo alignment
+    halign upper=right,
+    halign lower=left,
+    ]
+    \Large{\textbf{\inserttitle}}
+
+    \large{\emph{\insertauthor}}
+
+    \small{$^{*}$Purdue University, School of Electrical and Computer Engineering, West Lafayette, IN 47907, USA}
+
+    \small{$^{\dagger}$Qualcomm, Inc., Bridgewater, NJ 08807, USA}
+    \tcblower
+    \begin{center}
+      \includegraphics[width=4.5in]{./logos/Purdue-Sig-Black-cmyk.pdf}
+    \end{center}
+
+    \includegraphics[width=2.2in]{./logos/nsf4.pdf}
+    \hfill
+   \raisebox{0.2in}{\includegraphics[width=2in]{./logos/CSoI-logo-print.png}}
+\end{tcolorbox}
+\end{textblock}
+
+% all of the boxes in one raster
+\begin{textblock}{0.98}(0.01,0.121)
+  \begin{tcbraster}[%
+    raster columns = 2,
+    raster column skip = 0.01\paperwidth,
+    raster row skip = 0.01\paperwidth,
+    raster equal height=rows
+    ]%
+    % background/beam-based sounding
+    \begin{mybox}[%
+      lefthand ratio=0.5,
+      sidebyside align=top seam,
+      raster multicolumn=2
+      ]{Background}
+      \settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+      \addtolength{\leftmargini}{\labelsep}
+      \begin{itemize}
+      \item 5G technologies (mmWave \& massive MIMO) rely on \textbf{beamforming gains} to realize data rate requirements
+      \item However: \textbf{Optimal beamforming weights depend on the channel matrix}
+      \end{itemize}
+      \begin{center}
+        \includegraphics[width=0.25\textwidth]{./figures/beamforming.pdf}
+        \hspace*{1.3in}
+        %\includegraphics[width=0.6\textwidth]{./figures/beamforming_model.pdf}
+         \includegraphics[width=0.4\textwidth]{./figures/sysmodel/system_model.pdf}
+    \end{center}
+    \tcblower
+      \settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+      \addtolength{\leftmargini}{\labelsep}
+      \begin{itemize}
+      \item Traditional CSI acquisition (Sounding sequences $\rightarrow$ CSI feedback $\rightarrow$ SVD) is impractical with many antennas
+      \item Solution: \textbf{Beam-based sounding}
+        \begin{itemize}
+        \item Users always transmit on beams
+        \item Acquire beamformers using a TDD \textbf{beam alignment phase}
+        \item Exploit reciprocity of the wireless channel
+        \end{itemize}
+      \item \textbf{Need for \underline{practical} approaches to TDD-based beam alignment}
+        \begin{itemize}
+        \item Additive noise
+        \item mmWave channel models
+        \item Low overhead
+        \end{itemize}
+      \end{itemize}
+  \end{mybox}
+
+  % ping-pong beam alignment
+  \begin{mybox}[lower separated=false,sidebyside=false]{Ping-pong beam alignment}
+    \settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+    \addtolength{\leftmargini}{\labelsep}
+    \begin{itemize}
+    \item Divide each channel~use~$k$ into two time slots
+    \item Communication nodes sound beams in their half of the slots
+    \end{itemize}
+    \tcblower
+    \emph{Ping:} Node 1 sounds beam $\mathbf{f}[k]$ as \vspace*{-6pt}
+    \begin{IEEEeqnarray*}{rCl}
+      \label{eq:slot1_obs}
+      \mathbf{y}_{o}[k] = \sqrt{\rho_o}\, \mathbf{H}\mathbf{f}[k] + \mathbf{n}_{o}[k]
+    \end{IEEEeqnarray*}
+
+    \emph{Pong:} Node 2 sounds beam $\mathbf{z}[k]$ as \vspace*{-6pt}
+    \begin{IEEEeqnarray*}{rCl}
+      \label{eq:slot2_obs}
+      \mathbf{y}_{e}[k] = \sqrt{\rho_e}\, \mathbf{H}^{\T}\conj{\mathbf{z}}[k] + \mathbf{n}_{e}[k]
+    \end{IEEEeqnarray*}
+
+    \vspace*{0.1in}
+    \small{\underline{Notation:} $\mathbf{H}$\ ---\ $M_r \times M_t$ channel matrix, $\rho_{e}, \rho_{o}$\ ---\ beam alignment SNR, $\mathbf{n}_{e}[k], \mathbf{n}_{o}[k]$\ ---\ complex additive white Gaussian noise}
+  \end{mybox}
+  % power method
+  \begin{mybox}[%
+    lefthand ratio=0.5,
+    sidebyside align=top seam,
+    ]{Power Method}
+    \settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+    \addtolength{\leftmargini}{\labelsep}
+    \begin{itemize}
+    \item We propose new beam alignment algorithms based on the \textbf{power method}
+    \item Good performance for the noiseless case
+    \item \textbf{Convergence can slow down dramatically under additive noise}
+    \end{itemize}
+    \tcblower
+    \begin{center}
+      \small{\emph{Example: One-way Power Method}}
+    \end{center}
+    \resizebox{\textwidth}{!}{\input{./plots/power_method.pgf}}
+    \small{%
+      \begin{algorithmic}
+        \State{Given: Diagonalizable $\mathbf{A} \in \mathbb{C}^{n\times n}$ and unit 2-norm $\mathbf{v}^{(0)}$}
+        \For{$k = 1, 2, ...$}
+        \State $\mathbf{v}^{(k)} = \mathbf{A}\mathbf{v}^{(k-1)}/\|\mathbf{A}\mathbf{v}^{(k-1)}\|_{2}$
+        \EndFor
+      \end{algorithmic}}
+  \end{mybox}
+
+  % algorithms
+  \begin{mybox}[%
+    sidebyside=false,
+    % boxsep=0pt,
+    left=4pt,
+    right=4pt,
+    % top=4pt,
+    % bottom=4pt
+    ]{Proposed Algorithms}
+    \begin{mysubbox}[%
+      sidebyside,
+      lower separated=false,
+      ]{Sequential Least-squares (SLS) Power Method}
+      \small
+      \settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+      \addtolength{\leftmargini}{\labelsep}
+      \begin{itemize}
+      \item \underline{Main idea:} Construct a least-squares (LS) estimate of the channel matrix \textbf{using the sounding beams}
+      \item Compute \textbf{greedy estimates} of the singular vectors
+      \item Batch LS estimate would require all previous received beams at each iteration
+      \end{itemize}
+      \tcblower
+      \small
+      \settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+      \addtolength{\leftmargini}{\labelsep}
+      \begin{itemize}
+      \item Instead, construct channel estimates sequentially:
+        $$\widehat{\mathbf{H}}_{o,k} = f \left(\widehat{\mathbf{H}}_{o,k-1},\ \mathbf{y}_{o}[k],\ \mathbf{f}[k]\right)$$
+      \item Compute beamforming weights: $\mathbf{f}[k] = \frac{\widehat{\mathbf{H}}_{e,k}^* \mathbf{z}[k-1]}{\left\|\widehat{\mathbf{H}}_{e,k}^* \mathbf{z}[k-1]\right\|_{2}}$,
+        $\mathbf{z}[k] = \frac{\widehat{\mathbf{H}}_{o,k} \mathbf{f}[k]}{\left\|\widehat{\mathbf{H}}_{o,k} \mathbf{f}[k]\right\|_{2}}$
+      \end{itemize}
+    \end{mysubbox}
+
+    \begin{mysubbox}[%
+      sidebyside,
+      lower separated=false,
+      ]{Summed Power Method}
+      \small
+      \settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+      \addtolength{\leftmargini}{\labelsep}
+      \begin{itemize}
+      \item \underline{Main idea:} Derive beamforming weights as a function of the \textbf{running sum of received observations}
+      \item \textbf{Average over potentially noisy estimates} during beam alignment
+      \end{itemize}
+      \tcblower
+      \small
+      \settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+      \addtolength{\leftmargini}{\labelsep}
+      \begin{itemize}
+      \item Compute beamforming weights:
+      \end{itemize}
+      \begin{IEEEeqnarray*}{rCl}
+          \label{eq:sum:node2-sum}
+          \mathbf{f}[k+1] &=& \alpha_{k} \left[ \conj{\mathbf{y}}_{e}[k] + \cdots + \conj{\mathbf{y}}_{e}[0]\right]\\
+          &=&\alpha_{k} {\hspace{0.02in}} \mathbf{s}_{e}[k]\\
+          \mathbf{z}[k+1] &=& \beta_{k} \left[ \mathbf{y}_{o}[k] + \cdots + \mathbf{y}_{o}[0] \right]\\
+          &=& \beta_{k} {\hspace{0.02in}} \mathbf{s}_{o}[k]
+      \end{IEEEeqnarray*}
+      $\alpha_{k} = 1/\left\| \mathbf{s}_{e}[k] \right\|_{2}$, $\beta_{k} = 1/\left\| \mathbf{s}_{o}[k] \right\|_{2}$
+    \end{mysubbox}
+
+    \begin{mysubbox}[%
+      squeezed title*=Least-squares initialized Summed Power Method (LISP method),
+      sidebyside=false,
+      ]{}
+      \small
+      \settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+      \addtolength{\leftmargini}{\labelsep}
+      \begin{itemize}
+      \item Tradeoff between positive properties of Summed \& SLS methods
+      \item \textbf{Idea: ``prime'' the beamformer estimates up to period
+      $k_{\mathsf{switch}}$ with the SLS method, then switch to the Summed
+      Power Method}
+      \end{itemize}
+    \end{mysubbox}
+    \begin{center}
+    \footnotesize{%
+    \begin{tabular}{|c|c|c|}
+    \hline
+    & \textsf{\textbf{Computational Count}} & \textsf{\textbf{Feedback}} \\
+    \hline
+    Sequential Least-Squares & {\color{Red}$k_{\mathsf{max}} \cdot {\cal O}(M^3)$}
+                      &  {\color{Red}$k_{\mathsf{max}} \cdot {\cal O}(M)$} \\ \hline
+    Summed Power & {\color{LandGrantGreen}$k_{\mathsf{max}} \cdot {\cal O}(M)$}
+                      & {\color{LandGrantGreen}-} \\ \hline
+                      % Least-Squares Initialized Summed Power &
+                                                                 LISP &
+           {\color{Blue} $k_{\mathsf{switch}} \cdot {\cal O}(M^3)$ %\\
+           $+ (k_{\mathsf{max}} - k_{\mathsf{switch}}) \cdot {\cal O}(M)$}
+
+    & {\color{Blue}$k_{\mathsf{switch}} \cdot {\cal O}(M)$} \\\hline
+    \end{tabular}}
+      \end{center}
+  \end{mybox}
+  % simulation results
+  \begin{mybox}[sidebyside=false]{Numerical Studies}
+      \begin{tcbraster}[%
+        raster columns=2,
+        raster valign=center,
+        ]
+        \begin{tcolorbox}[blankest]
+          \small
+          \settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+          \addtolength{\leftmargini}{\labelsep}
+          \begin{itemize}
+          \item Metric of interest: Normalized effective beamforming gain $|\mathbf{z}^* \mathbf{H} \mathbf{f}|^2$
+          \item Varying SNR, iteration count, and antenna dimensions
+          \item Proposed algorithms \textbf{outperform state-of-the-art techniques} at -10 dB pre-beamforming SNR (see~\cite{journal_paper} for detailed discussion)
+          \end{itemize}
+        \end{tcolorbox}
+        \begin{tcolorbox}[blankest]
+          \resizebox{\textwidth}{!}{\input{./plots/gain_vs_snr_4x32_40000runs_100its_iid.pgf}}
+        \end{tcolorbox}
+
+        \begin{tcolorbox}[blankest]
+          \resizebox{\textwidth}{!}{\input{./plots/gain_m10dB_sparse.pgf}}
+        \end{tcolorbox}
+        \begin{tcolorbox}[blankest]
+          \resizebox{\textwidth}{!}{\input{./plots/gain_m10dB.pgf}}
+        \end{tcolorbox}
+
+        \begin{tcolorbox}[blankest]
+          \resizebox{\textwidth}{!}{\input{./plots/gain_vs_antennas_sparse_m10dB_10000runs_mean.pgf}}
+        \end{tcolorbox}
+        \begin{tcolorbox}[blankest]
+          \resizebox{\textwidth}{!}{\input{./plots/gain_vs_antennas_iid_m10dB_10000runs_mean.pgf}}
+        \end{tcolorbox}
+        \begin{tcolorbox}[blankest]
+          \footnotesize\centering
+          Sparse mmWave model
+        \end{tcolorbox}
+        \begin{tcolorbox}[blankest]
+          \footnotesize\centering
+          I.I.D Rayleigh fading model
+        \end{tcolorbox}
+      \end{tcbraster}
+  \end{mybox}
+
+  % references + NSF
+  \begin{mybox}[%
+    raster multicolumn=2,
+    sidebyside=false,
+    halign lower=right,
+    ]{Publications}
+    \small
+    \nocite{*}
+    \printbibliography
+    \tcblower
+    \scriptsize
+    \emph{This material is based upon work supported in part by the National Science Foundation under Grant No. CNS-1642982.}
+  \end{mybox}
+  \end{tcbraster}
+\end{textblock}
+
+% hack: move this wherever it fits
+\begin{textblock}{0.02}(0.85, 0.247)
+  \flushright
+  \resizebox{2in}{!}{\input{./figures/tdd.eps_tex}}
+\end{textblock}
+\end{frame}
+\end{document}
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

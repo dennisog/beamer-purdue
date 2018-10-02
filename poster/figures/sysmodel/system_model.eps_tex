@@ -1,0 +1,73 @@
+%% Creator: Inkscape inkscape 0.91, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'system_model.eps' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{252bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.76984127)%
+    \put(0,0){\includegraphics[width=\unitlength]{system_model.eps}}%
+    \put(1.03375239,1.32271043){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
+    \put(0.5000097,0.34226461){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{{\LARGE $\mathbf{H}^{\mathsf{T}}$}}}}%
+    \put(0.5000097,0.63731144){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{{\LARGE $\mathbf{H}$}}}}%
+    \put(0.17617176,0.60219588){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$f_{1}$}}}%
+    \put(0.17629911,0.44141398){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$f_{2}$}}}%
+    \put(0.17673181,0.33443079){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$\vdots$}}}%
+    \put(0.19495814,0.15099652){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$f_{M_{t}}$}}}%
+    \put(0.28431943,0.38920529){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$\vdots$}}}%
+    \put(0.7344492,0.38750967){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$\vdots$}}}%
+    \put(0.84519399,0.33289367){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$\vdots$}}}%
+    \put(0.85300649,0.60880415){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$\overline{z}_{1}$}}}%
+    \put(0.85300649,0.44593349){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$\overline{z}_{2}$}}}%
+    \put(0.87286878,0.15557493){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$\overline{z}_{M_{r}}$}}}%
+    \put(0.16843243,0.07549565){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Beamforming}}}%
+    \put(0.16920748,0.0259072){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{selection}}}%
+    \put(0.83127691,0.07546193){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Beamforming}}}%
+    \put(0.83205196,0.02587368){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{selection}}}%
+    \put(0.0318997,0.44007063){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{{\Large $\mathbf{Y}_{e}$}}}}%
+    \put(0.97145188,0.44007063){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{{\Large $\mathbf{Y}_{o}$}}}}%
+  \end{picture}%
+\endgroup%
