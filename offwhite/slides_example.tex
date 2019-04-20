@@ -2,7 +2,7 @@
 %
 % Example .tex file for the beamer-purdue theme
 %
-% Copyright (c) 2016 Dennis Ogbe <dogbe@purdue.edu>
+% Copyright (c) 2018 Dennis Ogbe <dogbe@purdue.edu>
 %
 % This file is published under the Creative Commons Attribution 4.0
 % International License. For more information, please visit
@@ -12,30 +12,35 @@
 % option: When called with the "altlogo" option, it will use the "Purdue
 % University" logo instead of the "Purdue Engineering" logo.
 
-% \documentclass[pdf,smaller,aspectratio=169]{beamer}
-\documentclass[pdf,smaller,aspectratio=43]{beamer}
+% 16:9 aspect ratio for modern displays
+\documentclass[pdf,smaller,aspectratio=169]{beamer}
+% \documentclass[pdf,smaller,aspectratio=43]{beamer} % 4:3 for traditional beamer feel
 \usepackage[utf8]{inputenc}
+
+% switch to presentation mode
+\mode<presentation>{}
 
 % load required packages. I prefer IEEEtran for equations, but that's a
 % personal preference.
 \usepackage{IEEEtrantools}
-
 \usepackage[cmex10]{mathtools} % for math equations
+\usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{bm}
 
+% demo for transparent full-frame background images
+\usepackage[export]{adjustbox}
+
 % theorems - can use \begin{IEEEproof} as alternative to \begin{proof}
-\usepackage{amsthm}
 \renewcommand{\qedsymbol}{$\blacksquare$} % want a black square for proofs
 
 % useful to set this when using Inkscape SVG figures
 \graphicspath{{./graphics/}}
 
-% tell beamer to use the purdue-gold theme
-% \usetheme[altlogo]{purduegold}
+% use the off-white theme
 \usetheme{offwhite}
 
-% demo of references
+% demo of references with biber/biblatex -- recommended to get the right look and functionality (footfullcite etc)
 \usepackage{filecontents}
 \begin{filecontents}{refs.bib}
 @ARTICLE{shannon48,
@@ -56,17 +61,28 @@ month={July},}
 \addbibresource{refs.bib}
 \defbibheading{bibliography}[\bibname]{}
 
+% set the purdue seal as title graphic and logo on the slides
+\input{./purdue_seal.tex} % this imports the \purdueseal command
+\titlegraphic{\resizebox{!}{2cm}{\purdueseal{darkgrey}}}
+\slidelogo{\purdueseal{darkgrey}}
 
-% set title and author
+% title page stuff
 \title{My new beamer template}
 \subtitle{It is much cooler than the old one}
 \author{Dennis Ogbe}
 \affiliation{Purdue University, West Lafayette, Indiana, USA}
+\date{Some conference, \today}
 
 % let's get started
 \begin{document}
 
+% a frame with an image as background. the min height and min width keys come from the adjustbox package.
+% inspired by https://www.ojdo.de/wp/2018/06/finally-the-definitive-full-frame-graphic-commands-for-beamer-in-latex/
 \begin{frame}[plain]
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[opacity=0.25] at (current page.center) {
+      \includegraphics[min height=\paperheight, min width=\paperwidth, keepaspectratio]{./graphics/purdue_150.jpg}};
+  \end{tikzpicture}
   \titlepage
 \end{frame}
 
@@ -121,7 +137,7 @@ month={July},}
   \frametitle{Figures}
 
   We can include graphics just like we are used to, for example this block
-  diagram of an noise-canceling system:
+  diagram of a noise-canceling system:
   \begin{center}
     \input{./graphics/anc_bd.pdf_tex}
   \end{center}
