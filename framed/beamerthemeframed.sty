@@ -1,0 +1,294 @@
+% beamerthemeframed.sty
+%
+% Copyright (c) 2018 Dennis Ogbe <dogbe@purdue.edu>
+%
+% logos:
+% \titlegraphic, \slidelogo, \sectionimage set the the logo on the title, the
+% bottom line on the slide, and on section headers, respectively.
+%
+% \venue lets you set a conference/presentation venue
+% the \footernorthwest etc. commands let you customize the footer
+% \begin{varblock}[optional size]{Title} lets you have a smaller block
+% \nakedframe gives a frame without footline
+
+% packages --------------------------------------------------------------------
+\RequirePackage{tikz}
+\RequirePackage{varwidth} % for AtBeginSection TOC
+
+\usetikzlibrary{calc}
+
+% custom commands -------------------------------------------------------------
+
+% check whether a string is empty https://tex.stackexchange.com/questions/94933
+\makeatletter
+{\catcode`\!=8 % funny catcode so ! will be a delimiter
+  \catcode`\Q=3 % funny catcode so Q will be a delimiter
+  \long\gdef\given#1{88\fi\Ifbl@nk#1QQQ\empty!}
+  \long\gdef\blank#1{88\fi\Ifbl@nk#1QQ..!}% if null or spaces
+  \long\gdef\nil#1{\IfN@Ught#1* {#1}!}% if null
+  \long\gdef\IfN@Ught#1 #2!{\blank{#2}}
+  \long\gdef\Ifbl@nk#1#2Q#3!{\ifx#3}% same as above
+}
+\makeatother
+\def\expblank{\expandafter\blank\expandafter} % additional macro
+
+% Venue
+\newcommand\insertvenue{}  % Empty by default.
+\newcommand\venue[1]{\renewcommand\insertvenue{#1}}
+
+% custom footer commands (if we want to change them)
+\newcommand\insertfooternorthwest{}
+\newcommand\footernorthwest[1]{\renewcommand\insertfooternorthwest{#1}}
+\newcommand\insertfootersouthwest{}
+\newcommand\footersouthwest[1]{\renewcommand\insertfootersouthwest{#1}}
+\newcommand\insertfootersoutheast{}
+\newcommand\footersoutheast[1]{\renewcommand\insertfootersoutheast{#1}}
+\newcommand\insertfooternortheast{}
+\newcommand\footernortheast[1]{\renewcommand\insertfooternortheast{#1}}
+\footernorthwest{\insertshortauthor}
+\footersouthwest{\emph{\inserttitle}}
+\footernortheast{\insertvenue}
+\footersoutheast{\insertdate}
+
+% define colors ---------------------------------------------------------------
+
+% alternative color scheme if the one above is too warm
+\definecolor{offwhite}{HTML}{F5F5F5} % (245,245,245)
+\definecolor{framegray}{HTML}{d9d9d9} % (85.1,85.1,85.1)
+\definecolor{compblue}{HTML}{8496B3} % (132,150,179)
+\definecolor{bluetwo}{HTML}{5165B3} % (81,101,179)
+\definecolor{darkgrey}{HTML}{363636} % (54,54,54)
+\definecolor{lightgrey}{HTML}{757575} % (117,117,117)
+\definecolor{blockbg}{HTML}{CCC8C0} % (204,200,192)
+\definecolor{gold}{HTML}{807052} % (128,112,82)
+\definecolor{purp}{HTML}{C2ABCC} % (194,171,204)
+
+\definecolor{footer}{HTML}{595959}
+
+% I'm sure these are already defined but oh well...
+\definecolor{Black}{HTML}{000000}
+\definecolor{White}{HTML}{FFFFFF}
+
+% set colors  ----------------------------------------------------------------
+
+% page title and subtitle
+\setbeamercolor{title}{fg=darkgrey}
+\setbeamercolor{subtitle}{fg=lightgrey}
+\setbeamercolor{background canvas}{bg=framegray}
+% frame title and subtitle
+\setbeamercolor{frametitle}{fg=darkgrey}
+\setbeamercolor{framesubtitle}{fg=lightgrey}
+% blocks (theorem etc.)
+\setbeamercolor{block title}{fg=offwhite, bg=gold}
+\setbeamercolor{block body}{fg=Black, bg=blockbg}
+% itemizing
+\useitemizeitemtemplate{\tiny\raise1.5pt\hbox{\color{Black}$\blacktriangleright$}}
+\usesubitemizeitemtemplate{\tiny\raise1.5pt\hbox{\color{Black}$\blacktriangleright$}}
+\usesubsubitemizeitemtemplate{\tiny\raise1.5pt\hbox{\color{Black}$\bigstar$}}
+\setbeamercolor{itemize body}{fg=Black}
+\setbeamercolor{enumerate item}{fg=Black}
+\setbeamercolor{local structure}{fg=Black}
+% table of contents
+\setbeamercolor{section in toc}{fg=Black}
+% footnote and citations
+\setbeamercolor{footnote mark}{fg=bluetwo}
+\setbeamercolor{bibliography entry author}{fg=Black}
+\setbeamercolor{bibliography entry title}{fg=Black}
+\setbeamercolor{bibliography entry note}{fg=lightgrey}
+
+% logos -----------------------------------------------------------------------
+% this command lets us change to bottom line slide logo
+\newcommand\insertslidelogo{}  % Empty by default.
+\newcommand\slidelogo[1]{\renewcommand\insertslidelogo{#1}}
+
+% have a command that lets us insert an image into the section headers. this must be called before defining a new section
+\newcommand\insertsectionimage{}  % Empty by default.
+\newcommand\sectionimage[1]{\renewcommand\insertsectionimage{#1}}
+
+% fonts -----------------------------------------------------------------------
+\usefonttheme{professionalfonts}
+\usefonttheme{serif}
+\RequirePackage{charter}
+
+\setbeamerfont{footnote}{size=\tiny}
+\setbeamerfont{footernumber}{size=\scriptsize}
+\setbeamerfont{frametitle}{size=\Large, series=\bfseries}
+
+\setbeamerfont{title}{size=\LARGE, series=\bfseries}
+\setbeamerfont{subtitle}{size=\large}
+\setbeamerfont{date}{size=\footnotesize}
+
+% misc ------------------------------------------------------------------------
+
+% bibliography items: number instead of symbol
+\setbeamertemplate{bibliography item}[text]
+
+% margins -- maximize space on slide
+\setbeamersize{text margin left=0.4cm}
+\setbeamersize{text margin right=0.4cm}
+
+% Centered variable width block -- https://tex.stackexchange.com/questions/12550
+\newenvironment<>{varblock}[2][0.9\textwidth]{%
+  \setlength{\textwidth}{#1}%
+  \setlength{\linewidth}{\textwidth}% required to itemize respect the width of block
+  \begin{center}
+    \begin{minipage}{#1}
+      \begin{actionenv}#3%
+        \def\insertblocktitle{#2}%
+        \par%
+        \usebeamertemplate{block begin}}
+      {\par%
+        \usebeamertemplate{block end}%
+      \end{actionenv}
+    \end{minipage}
+  \end{center}
+}
+
+% math proof color QED symbol
+\setbeamertemplate{qed symbol}{\color{Black} $\blacksquare$}
+
+% bullets -- use a black triangle
+\renewcommand{\bullet}{{\tiny\raise1.5pt\hbox{\color{Black}$\blacktriangleright$}}}
+
+% insert a logo on every page on the top right -- set with the \slidelogo command, no need to resize
+\logo{\tikz[remember picture,overlay]\node[inner sep=0.3cm,anchor=north east] at (current page.north east) {\resizebox{1.1cm}{!}{\insertslidelogo}};}
+
+% frame  background -----------------------------------------------------------
+\def\framemarg{0.15}
+\def\framebot{0.5}
+
+\setbeamertemplate{background}{
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[rounded corners, fill=white] ($ (current page.north west) + (\framemarg, -\framemarg) $) rectangle ($ (current page.south east) + (-\framemarg, \framebot)$);
+  \end{tikzpicture}
+}
+
+% frame title -----------------------------------------------------------------
+\setbeamertemplate{frametitle}{
+  \vspace{0.15cm}
+  {\usebeamercolor{frametitle}
+    \usebeamerfont{frametitle}
+    \insertframetitle}
+
+  {\usebeamercolor{framesubtitle}
+    \usebeamerfont{framesubtitle}
+    \insertframesubtitle}
+}
+
+% footline --------------------------------------------------------------------
+
+% we need this command to put together the footer without the number
+\newcommand\insertmyfooter{%
+  \begin{beamercolorbox}[wd=0.47\paperwidth,ht=\framebot cm, left, sep=0.03cm, ignorebg]{}
+    {\color{footer}\tiny\strut\insertfooternorthwest\strut\newline\strut\insertfootersouthwest\strut}
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[wd=0.47\paperwidth,ht=\framebot cm, right, sep=0.03cm, ignorebg]{}
+    {\color{footer}\tiny\strut\insertfooternortheast\strut\newline\strut\insertfootersoutheast\strut}
+  \end{beamercolorbox}
+}%
+\newcommand\insertframenumberbox[1]{
+  \begin{beamercolorbox}[wd=0.04\paperwidth,ht=\framebot cm, sep=0.09cm,  left, ignorebg]{}
+    {\color{footer}\usebeamerfont{footernumber}\strut#1\strut}
+  \end{beamercolorbox}
+}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \insertframenumberbox{\insertframenumber}
+  \insertmyfooter
+}
+
+% title page ------------------------------------------------------------------
+\setbeamertemplate{title page}{%
+  \addtocounter{framenumber}{-1}
+  \begin{center}
+    \vfill
+    {%
+      \usebeamerfont{title}
+      \usebeamercolor[fg]{title}
+      \noindent\inserttitle
+    }%
+    \vfill
+    {%
+      \usebeamerfont{subtitle}
+      \usebeamercolor[fg]{subtitle}
+      \noindent\insertsubtitle
+    }%
+    \vfill
+    \insertauthor\\
+    \noindent\insertinstitute
+    \vfill
+    \inserttitlegraphic\\
+    {%
+      \usebeamerfont{date}
+      \usebeamercolor[fg]{subtitle}
+      \if\expblank{\insertvenue}%
+      \insertdate
+      \else
+      \insertvenue, \insertdate
+      \fi
+    }%
+  \end{center}
+}%
+
+% we define a frame environment without the bottom line border. useful for title pages
+\newenvironment{nakedframe}{
+  \setbeamertemplate{background}{
+    \begin{tikzpicture}[remember picture,overlay]
+      \fill[rounded corners, fill=white] ($ (current page.north west) + (\framemarg, -\framemarg) $) rectangle ($ (current page.south east) + (-\framemarg, \framemarg)$);
+    \end{tikzpicture}
+  }
+  \begin{frame}[plain]
+  }{
+  \end{frame}
+}
+
+% section page ----------------------------------------------------------------
+
+% patch the table of contents to enable a centered but left justified table of contents
+% https://tex.stackexchange.com/questions/37788
+\makeatletter
+\patchcmd{\beamer@sectionintoc}{%
+  \hbox{\vbox{%
+      \def\beamer@breakhere{\\}%
+      \beamer@tocact{\ifnum\c@section=#1\beamer@toc@cs\else\beamer@toc@os\fi}{section in toc}}}%
+}{%
+  \hbox{%
+    \def\beamer@breakhere{}%
+    \beamer@tocact{\ifnum\c@section=#1\beamer@toc@cs\else\beamer@toc@os\fi}{section in toc}}%
+}{}{}
+\makeatother
+
+% insert the image (if it exists) followed by table of contents
+\AtBeginSection{%
+  {%
+    \setbeamertemplate{footline}{
+      \leavevmode%
+      \insertframenumberbox{}
+      \insertmyfooter
+    }
+    \setbeamertemplate{section in toc}{%
+      \large\bfseries
+      \usebeamercolor[fg]{frametitle}
+      Part \inserttocsectionnumber: {\em \inserttocsection\/}
+    }%
+    \addtocounter{framenumber}{-1}
+    \begin{frame}
+      \begin{center}
+        \insertsectionimage
+      \end{center}
+      \vfill
+      \begin{center}
+        \begin{varwidth}{\textwidth}
+          \tableofcontents[currentsection]
+        \end{varwidth}
+      \end{center}
+    \end{frame}
+  }}%
+
+% table of contents -----------------------------------------------------------
+\setbeamertemplate{section in toc}{%
+  {\tiny \raisebox{1.5pt}{$\blacktriangleright$}} Part \inserttocsectionnumber: {\em \inserttocsection\/}
+}%
+
+% template ends here

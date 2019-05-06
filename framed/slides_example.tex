@@ -1,0 +1,208 @@
+% slides_example.tex
+%
+% Example .tex file for the beamer-purdue theme
+%
+% Copyright (c) 2018 Dennis Ogbe <dogbe@purdue.edu>
+%
+% This file is published under the Creative Commons Attribution 4.0
+% International License. For more information, please visit
+% https://creativecommons.org/licenses/by/4.0/
+%
+% See the README.md for usage instructions. This style really only has one
+% option: When called with the "altlogo" option, it will use the "Purdue
+% University" logo instead of the "Purdue Engineering" logo.
+
+% 16:9 aspect ratio for modern displays
+\documentclass[pdf,smaller,aspectratio=169]{beamer}
+%\documentclass[pdf,smaller,aspectratio=43]{beamer} % 4:3 for traditional beamer feel
+\usepackage[utf8]{inputenc}
+
+% switch to presentation mode
+\mode<presentation>{}
+
+% load required packages. I prefer IEEEtran for equations, but that's a
+% personal preference.
+\usepackage{IEEEtrantools}
+\usepackage[cmex10]{mathtools} % for math equations
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{verbatim}
+
+% demo for transparent full-frame background images
+\usepackage[export]{adjustbox}
+
+% theorems - can use \begin{IEEEproof} as alternative to \begin{proof}
+\renewcommand{\qedsymbol}{$\blacksquare$} % want a black square for proofs
+
+% useful to set this when using Inkscape SVG figures
+\graphicspath{{./graphics/}}
+
+% use the off-white theme
+\usetheme{framed}
+
+% demo of references with biber/biblatex -- recommended to get the right look and functionality (footfullcite etc)
+\usepackage{filecontents}
+\begin{filecontents}{refs.bib}
+@ARTICLE{shannon48,
+author={C. E. {Shannon}},
+journal={The Bell System Technical Journal},
+title={A mathematical theory of communication},
+year={1948},
+volume={27},
+number={3},
+pages={379-423},
+keywords={},
+doi={10.1002/j.1538-7305.1948.tb01338.x},
+ISSN={0005-8580},
+month={July},}
+\end{filecontents}
+
+\usepackage[bibstyle=ieee,citestyle=numeric,backend=biber]{biblatex}
+\addbibresource{refs.bib}
+\defbibheading{bibliography}[\bibname]{}
+
+% set the purdue seal as title graphic and logo on the slides
+\input{./purdue_seal.tex} % this imports the \purdueseal command
+\titlegraphic{\resizebox{!}{2cm}{\purdueseal{darkgrey}}}
+\slidelogo{\purdueseal{darkgrey}}
+
+% title page stuff
+\title{The \texttt{framed} beamer template}
+\subtitle{And another one...}
+\author{Dennis Ogbe}
+\institute{Purdue University, West Lafayette, Indiana, USA}
+\venue{Important Conference}
+\date{\today}
+
+% example on how to change the footer text if needed
+% \footersouthwest{I can change the footer text as I wish}
+
+% let's get started
+\begin{document}
+
+% the title page is a fully plain frame
+\begin{nakedframe}
+  \titlepage
+\end{nakedframe}
+
+\begin{frame}
+  \frametitle{Overview}
+  \tableofcontents
+\end{frame}
+
+\section{Examples}
+\label{sec:examples}
+
+\setcounter{framenumber}{14}
+\begin{frame}
+  \frametitle{Hello!}
+  \framesubtitle{About the template}
+
+  This is another try at a more subtle beamer template.
+  \vfill
+  An itemized list looks as follows:
+  \begin{itemize}
+  \item Item 1
+  \item Item 2
+  \end{itemize}
+  \vfill
+  The continuous-time Fourier Transform of a signal $x(t)$ is defined as
+
+  \begin{IEEEeqnarray}{rCl}
+    \label{eq:ft}
+    X(\omega) = \int_{-\infty}^{\infty} x(t)e^{-j\omega t}\ \mathrm{dt}
+  \end{IEEEeqnarray}
+
+\end{frame}
+
+\setcounter{framenumber}{263}
+\begin{frame}
+  \frametitle{A Theorem in a Box}
+
+  % \begin{theorem}
+  %   The Bessel functions of the first kind $J_{v}(x)$ are the solutions to the
+  %   Bessel differential equation
+  %   \begin{IEEEeqnarray}{rCl}
+  %     \label{eq:bessel}
+  %     x^{2} \frac{d^{2}\,y}{d\,x^{2}} + x \frac{d\,y}{d\,x} + \left( x^{2} - v^{2} \right)y = 0.
+  %   \end{IEEEeqnarray}
+  % \end{theorem}
+  % \begin{IEEEproof}
+  %   Omitted.\footnote{This is a footnote explaining why the proof was omitted.}
+  % \end{IEEEproof}
+  \begin{varblock}{Theorem}
+    The Bessel functions of the first kind $J_{v}(x)$ are the solutions to the
+    Bessel differential equation
+    \begin{IEEEeqnarray}{rCl}
+      \label{eq:bessel}
+      x^{2} \frac{d^{2}\,y}{d\,x^{2}} + x \frac{d\,y}{d\,x} + \left( x^{2} - v^{2} \right)y = 0.
+    \end{IEEEeqnarray}
+  \end{varblock}
+  The proof is omitted.\footnote{This is a footnote explaining why the proof was omitted.}
+  \vfill
+  I am sure Shannon did not use this fact\footfullcite{shannon48}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Figures and columns}
+  \begin{columns}[t]
+    \begin{column}{0.48\textwidth}
+  We can include graphics just like we are used to, for example this block
+  diagram of a noise-canceling system:
+  \begin{center}
+    \input{./graphics/anc_bd.pdf_tex}
+  \end{center}
+\end{column}
+\vrule{}
+\begin{column}{0.48\textwidth}
+  Columns work great in a 16:9 aspect ratio
+  \begin{itemize}
+  \item Add more text
+  \item Even more information
+  \end{itemize}
+  \vfill
+  \begin{varblock}[0.95\textwidth]{This is a Block in a Column}
+    We can also add varblocks to bring the point even more across!
+  \end{varblock}
+\end{column}
+  \end{columns}
+\end{frame}
+
+\sectionimage{\includegraphics[width=5cm]{./plots/bessel.pdf}}
+\section{Plots}
+\label{sec:plots}
+
+\begin{frame}
+  \frametitle{Plotting is fun!}
+
+  On the following pages, we include two examples on how to include plots:
+  \begin{enumerate}
+    \item A PDF plot
+    \item A PGF/TikZ plot
+  \end{enumerate}
+
+  PDF plots are nice, but nothing beats the native look of PGF/TikZ. The source
+  code to generate both plots can be found in \texttt{extra/plot\_bessel.py}
+\end{frame}
+
+\begin{frame}
+  \frametitle{A Plot}
+  \begin{center}
+    \input{./plots/bessel.pgf}
+  \end{center}
+\end{frame}
+
+\sectionimage{}
+\begin{frame}[allowframebreaks]
+  \frametitle{References}
+  \renewcommand*{\bibfont}{\scriptsize}
+  \printbibliography
+\end{frame}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
